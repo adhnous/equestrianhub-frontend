@@ -1,0 +1,48 @@
+{
+    "adminDashboard": {
+      "title": "Admin Dashboard",
+      "welcome": "Welcome back"
+    },
+    "buttons": {
+      "logout": "Logout"
+    },
+    "stats": {
+      "totalUsers": "Total Users",
+      "trainers": "Trainers",
+      "trainees": "Trainees",
+      "classes": "Classes",
+      "horses": "Horses"
+    },
+    "manage": {
+      "users": "Manage Users",
+      "usersDesc": "View and manage all user accounts",
+      "trainers": "Manage Trainers",
+      "trainersDesc": "Handle trainer profiles and schedules",
+      "trainees": "Manage Trainees",
+      "traineesDesc": "Oversee student progress and profiles",
+      "classes": "Manage Classes",
+      "classesDesc": "Create and schedule training sessions",
+      "horses": "Manage Horses",
+      "horsesDesc": "Track and manage equine resources",
+      "progress": "View Progress",
+      "progressDesc": "Monitor training advancements"
+    }, 
+    
+      "login": {
+        "welcome": "Welcome Back",
+        "description": "Please sign in to continue",
+        "forgotPassword": "Forgot password?",
+        "noAccount": "Don't have an account? Sign up"
+      },
+      "buttons": {
+        "signIn": "Sign In"
+      },
+      "placeholders": {
+        "username": "Username",
+        "password": "Password",
+        "role": "Admin"
+      }
+    
+    
+  }
+  
