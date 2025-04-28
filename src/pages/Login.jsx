@@ -45,7 +45,7 @@ export default function Login() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-600 to-indigo-700 relative overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-900 to-indigo-900 relative overflow-hidden">
       <div className="absolute inset-0 opacity-20">
         <div className="absolute top-20 left-20 w-64 h-64 bg-purple-400 rounded-full mix-blend-screen blur-3xl animate-float"></div>
         <div className="absolute bottom-20 right-20 w-64 h-64 bg-indigo-400 rounded-full mix-blend-screen blur-3xl animate-float-delayed"></div>
@@ -55,13 +55,6 @@ export default function Login() {
         <div className="absolute inset-0 rounded-2xl border-2 border-white/5 pointer-events-none"></div>
 
         <div className="text-center">
-          <div className="mb-4 flex justify-center">
-            <img 
-              src="/horse-icon.png" 
-              className="w-16 h-16 animate-float" 
-              alt="Equestrian Hub Logo"
-            />
-          </div>
           <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-300 to-indigo-300 bg-clip-text text-transparent mb-2">
             {t('login.welcome')}
           </h1>

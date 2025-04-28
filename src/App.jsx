@@ -18,11 +18,24 @@ import ManageTrainees from './pages/admin/ManageTrainees'
 import ManageClasses from './pages/admin/ManageClasses'
 import ManageHorses from './pages/admin/ManageHorses'
 import ViewProgress from './pages/admin/ViewProgress'
+import ManageCompetitions from './pages/admin/ManageCompetitions'
+// Trainee Pages
+
+import TrainerClasses from './pages/Trainer/TrainerClasses'
+import TrainerCompetitions from './pages/Trainer/TrainerCompetitions'
+
+// Trainee Pages
+import TraineeClasses from './pages/Trainee/TraineeClasses'
+import TraineeCompetitions from './pages/Trainee/TraineeCompetitions' 
+import AssignHorsesToCompetitions from './pages/admin/AssignHorsesToCompetitions'
+import ManageCompetitionsLanding from './pages/admin/ManageCompetitionsLanding'
+// (Adjust the import path based on where you save it)
+
+
 
 export default function App() {
   const { role } = useUserStore()
 
-  // Dynamically update language and direction
   useEffect(() => {
     document.documentElement.lang = i18n.language
     document.documentElement.dir = i18n.language === 'ar' ? 'rtl' : 'ltr'
@@ -37,30 +50,39 @@ export default function App() {
 
   return (
     <Router>
-      {/* 👇 Add relative wrapper so absolute switcher positions correctly */}
       <div className="relative min-h-screen">
-        {/* 🌍 Language Toggle Button */}
         <LanguageSwitcher />
-
-        {/* App Routes */}
         <Routes>
-          {/* Public Routes */}
           <Route path="/" element={<Landing />} />
           <Route path="/login" element={<Login />} />
-
-          {/* Shared Dashboard Entry */}
           <Route path="/dashboard" element={getDashboard()} />
-
-          {/* Admin-Specific Routes */}
           <Route path="/admin/users" element={<ManageUsers />} />
           <Route path="/admin/trainers" element={<ManageTrainers />} />
           <Route path="/admin/trainees" element={<ManageTrainees />} />
           <Route path="/admin/classes" element={<ManageClasses />} />
           <Route path="/admin/horses" element={<ManageHorses />} />
           <Route path="/admin/progress" element={<ViewProgress />} />
-
-          {/* Fallback */}
+          <Route path="/admin/competitions" element={<ManageCompetitions />} />
+          <Route path="/admin/assign-horses" element={<AssignHorsesToCompetitions />} />
           <Route path="*" element={<Navigate to="/" />} />
+
+
+           {/* Trainer Routes */}
+  <Route path="/trainer/classes" element={<TrainerClasses />} />
+  <Route path="/trainer/competitions" element={<TrainerCompetitions />} />
+
+  {/* Trainee Routes */}
+  <Route path="/trainee/classes" element={<TraineeClasses />} />
+  <Route path="/trainee/competitions" element={<TraineeCompetitions />} />
+
+
+
+  <Route path="/admin/manage-competitions" element={<ManageCompetitionsLanding />} />
+<Route path="/admin/assign-horses" element={<AssignHorsesToCompetitions />} />
+<Route path="/admin/manage-competitions/crud" element={<ManageCompetitions />} />
+
+
+  
         </Routes>
       </div>
     </Router>

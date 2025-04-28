@@ -2,9 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Import Arabic font */
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap');
+
 /* Base styles */
 html, body {
-  @apply bg-gray-50 text-gray-800 font-sans;
+  @apply bg-gray-50 text-gray-800;
   margin: 0;
   padding: 0;
   height: 100%;
@@ -14,9 +17,82 @@ html, body {
 html[dir="rtl"] {
   direction: rtl;
   text-align: right;
+  font-family: 'Cairo', sans-serif;
 }
 
 html[dir="ltr"] {
   direction: ltr;
   text-align: left;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.rtl-layout {
+  /* RTL specific styles */
+}
+
+/* Font classes */
+.font-ar {
+  font-family: 'Cairo', sans-serif;
+}
+
+.font-en {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* RTL specific utility classes */
+.rtl-flip {
+  transform: scaleX(-1);
+}
+
+/* RTL specific layout adjustments */
+html[dir="rtl"] .ml-auto {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+html[dir="rtl"] .mr-auto {
+  margin-right: 0;
+  margin-left: auto;
+}
+
+html[dir="rtl"] .text-left {
+  text-align: right;
+}
+
+html[dir="rtl"] .text-right {
+  text-align: left;
+}
+
+/* RTL specific flex direction changes */
+html[dir="rtl"] .flex-row {
+  flex-direction: row-reverse;
+}
+
+html[dir="rtl"] .space-x-1 > :not([hidden]) ~ :not([hidden]),
+html[dir="rtl"] .space-x-2 > :not([hidden]) ~ :not([hidden]),
+html[dir="rtl"] .space-x-3 > :not([hidden]) ~ :not([hidden]),
+html[dir="rtl"] .space-x-4 > :not([hidden]) ~ :not([hidden]),
+html[dir="rtl"] .space-x-6 > :not([hidden]) ~ :not([hidden]),
+html[dir="rtl"] .space-x-8 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 1;
+}
+
+/* Animation classes */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes float-delayed {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+  animation: float-delayed 6s ease-in-out infinite;
+  animation-delay: 2s;
 }

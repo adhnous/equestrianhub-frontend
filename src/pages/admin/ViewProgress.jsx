@@ -9,11 +9,40 @@ export default function ViewProgress() {
 
   const fetchProgress = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/trainees')
-      const data = await res.json()
-      setProgressData(data)
+      // ✅ Temporary Dummy Data
+      const dummyData = [
+        {
+          id: '1',
+          traineeName: 'Ahmed Saleh',
+          classTitle: 'Jumping Basics',
+          progressPercentage: 72,
+          progressDescription: 'Mastered basic jumps and balance',
+          updatedAt: new Date().toISOString()
+        },
+        {
+          id: '2',
+          traineeName: 'Lina Farhat',
+          classTitle: 'Dressage 101',
+          progressPercentage: 45,
+          progressDescription: 'Completed half the program modules',
+          updatedAt: new Date().toISOString()
+        },
+        {
+          id: '3',
+          traineeName: 'Omar Al-Mutairi',
+          classTitle: 'Advanced Racing',
+          progressPercentage: 25,
+          progressDescription: 'Needs to improve lap time consistency',
+          updatedAt: new Date().toISOString()
+        }
+      ]
+
+      // ✅ Sort trainees by progress highest first
+      const sortedData = dummyData.sort((a, b) => b.progressPercentage - a.progressPercentage)
+
+      setProgressData(sortedData)
     } catch (err) {
-      console.error('Error fetching progress data:', err)
+      console.error('Error loading dummy progress data:', err)
     } finally {
       setLoading(false)
     }
@@ -22,6 +51,12 @@ export default function ViewProgress() {
   useEffect(() => {
     fetchProgress()
   }, [])
+
+  const getProgressColor = (percentage) => {
+    if (percentage >= 70) return 'bg-green-400'
+    if (percentage >= 40) return 'bg-yellow-400'
+    return 'bg-red-400'
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-purple-50 p-6">
@@ -70,17 +105,17 @@ export default function ViewProgress() {
                     {entry.progressPercentage || 'N/A'}%
                   </span>
                 </div>
-                
+
                 <p className="text-sm text-gray-600 mb-4">{entry.progressDescription}</p>
-                
+
                 <div className="flex items-center gap-2 text-xs text-gray-500">
                   <CalendarIcon className="w-4 h-4" />
                   <span>Updated: {new Date(entry.updatedAt).toLocaleDateString()}</span>
                 </div>
 
                 <div className="mt-4 h-2 bg-gray-100 rounded-full overflow-hidden">
-                  <div 
-                    className="h-full bg-gradient-to-r from-purple-400 to-indigo-400 transition-all duration-500" 
+                  <div
+                    className={`h-full ${getProgressColor(entry.progressPercentage)} transition-all duration-500`}
                     style={{ width: `${entry.progressPercentage || 0}%` }}
                   ></div>
                 </div>

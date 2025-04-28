@@ -7,14 +7,18 @@ export const useUserStore = create(
       userId: null,
       username: '',
       role: '',
+      _hasHydrated: false,
 
       login: ({ userId, username, role }) => set({ userId, username, role }),
-
-      logout: () => set({ userId: null, username: '', role: '' })
+      logout: () => set({ userId: null, username: '', role: '' }),
+      setHasHydrated: () => set({ _hasHydrated: true })
     }),
     {
-      name: 'user-store', // Key in localStorage
-      getStorage: () => localStorage // Or sessionStorage if you prefer
+      name: 'user-store',
+      getStorage: () => localStorage,
+      onRehydrateStorage: () => () => {
+        useUserStore.getState().setHasHydrated()
+      }
     }
   )
 )

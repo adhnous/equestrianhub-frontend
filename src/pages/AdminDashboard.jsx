@@ -2,6 +2,9 @@ import { useTranslation } from 'react-i18next'
 import { useEffect, useState } from 'react'
 import { useUserStore } from '../store/userStore'
 import { useNavigate } from 'react-router-dom'
+import LanguageSwitcher from '../components/LanguageSwitcher'
+
+import clsx from 'clsx'
 import {
   ArrowRightIcon,
   UsersIcon,
@@ -9,7 +12,9 @@ import {
   BookOpenIcon,
   ChartBarIcon,
   UserGroupIcon,
-  SparklesIcon
+  SparklesIcon,
+  TrophyIcon,
+  AdjustmentsHorizontalIcon
 } from '@heroicons/react/24/outline'
 
 function StatCard({ label, value, color, icon: Icon }) {
@@ -93,13 +98,16 @@ export default function AdminDashboard() {
             </h1>
             <p className="text-sm text-gray-400">{t('adminDashboard.welcome')}, {username}</p>
           </div>
-          <button
-            onClick={logout}
-            className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 hover:border-red-200 hover:bg-red-500/10 text-red-400 transition-all group"
-          >
-            <span>{t('buttons.logout')}</span>
-            <ArrowRightIcon className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
-          </button>
+          <div className="flex items-center gap-4">
+            <LanguageSwitcher />
+            <button
+              onClick={logout}
+              className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 hover:border-red-200 hover:bg-red-500/10 text-red-400 transition-all group"
+            >
+              <span>{t('buttons.logout')}</span>
+              <ArrowRightIcon className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
+            </button>
+          </div>
         </div>
 
         {/* Stats Grid */}
@@ -119,6 +127,13 @@ export default function AdminDashboard() {
           <ManagementButton icon={BookOpenIcon} label={t('manage.classes')} desc={t('manage.classesDesc')} path="classes" color="yellow" />
           <ManagementButton icon={SparklesIcon} label={t('manage.horses')} desc={t('manage.horsesDesc')} path="horses" color="pink" />
           <ManagementButton icon={ChartBarIcon} label={t('manage.progress')} desc={t('manage.progressDesc')} path="progress" color="teal" />
+          <ManagementButton
+            icon={TrophyIcon}
+            label={t('manage.competitions')}
+            desc={t('manage.competitionsDesc')}
+            path="manage-competitions"
+            color="amber"
+          />
         </div>
       </div>
     </div>
@@ -128,9 +143,30 @@ export default function AdminDashboard() {
     return (
       <button
         onClick={() => goToManagementPage(path)}
-        className={`group flex items-center gap-4 p-6 bg-white/5 rounded-xl border border-white/10 hover:border-${color}-500/50 hover:bg-${color}-500/10 transition-all`}
+        className={clsx(
+          'group flex items-center gap-4 p-6 bg-white/5 rounded-xl border border-white/10 transition-all',
+          {
+            'hover:border-blue-500/50 hover:bg-blue-500/10': color === 'blue',
+            'hover:border-purple-500/50 hover:bg-purple-500/10': color === 'purple',
+            'hover:border-green-500/50 hover:bg-green-500/10': color === 'green',
+            'hover:border-yellow-500/50 hover:bg-yellow-500/10': color === 'yellow',
+            'hover:border-pink-500/50 hover:bg-pink-500/10': color === 'pink',
+            'hover:border-teal-500/50 hover:bg-teal-500/10': color === 'teal',
+            'hover:border-amber-500/50 hover:bg-amber-500/10': color === 'amber'
+          }
+        )}
       >
-        <Icon className={`w-8 h-8 text-${color}-400`} />
+        <Icon
+          className={clsx('w-8 h-8', {
+            'text-blue-400': color === 'blue',
+            'text-purple-400': color === 'purple',
+            'text-green-400': color === 'green',
+            'text-yellow-400': color === 'yellow',
+            'text-pink-400': color === 'pink',
+            'text-teal-400': color === 'teal',
+            'text-amber-400': color === 'amber'
+          })}
+        />
         <span className="text-left">
           <h3 className="text-lg font-semibold text-white">{label}</h3>
           <p className="text-sm text-gray-400">{desc}</p>
